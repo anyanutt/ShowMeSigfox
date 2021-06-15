@@ -36,7 +36,7 @@ def create_app(test_config=None):
         content = request.json
         time = int(content['time'])
         time = datetime.datetime.fromtimestamp(time).strftime('%Y-%m-%d %H:%M:%S')
-        tempStore.append(content['temp'])
+        tempStore.append(content['seqNumber'])
         dateStore.append(time)
         if len(tempStore) > 10:
             del tempStore[0]
