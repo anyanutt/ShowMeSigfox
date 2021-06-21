@@ -1,0 +1,57 @@
+{% extends "boilerplate.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}" defer=""></script>
+{% endblock %}
+
+{% block subheader %}
+<header class="subheader text-light w3-container">
+  <div>
+    {% block title %}Devices{% endblock %}
+    <div  style="position: relative;">
+      <a href="#" class="float-button">
+        <i class="fa fa-plus float-icon"></i>
+      </a>
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-responsive displaybox" id="devices">
+    <table class="w3-table w3-card w3-bordered w3-hoverable" id="devicestable">
+      <thead>
+        <tr>
+          <th><input type="checkbox" name="selectall" onchange="selectAll(this)"/></th>
+          <th>Name</th>
+          <th>Device ID</th>
+          <th>Last Activity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      {% for device in devices %}
+        <tr class="w3-hover-light-grey">
+          <td><input type="checkbox" name="cb{{ device.dev_id}}" /></td>
+          <td>{{ device.dev_name }}</td>
+          <td>{{ device.dev_id }}</td>
+          <td><button id="myBtn">Open Modal</button></td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal fade">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+{% endblock %}

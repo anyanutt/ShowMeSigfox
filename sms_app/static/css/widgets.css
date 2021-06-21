@@ -1,0 +1,111 @@
+.widget-default {
+    margin: 10px 10px;
+    height: 100px;
+    width: 150px;
+    min-height: min-content;
+    min-width: min-content;
+    max-height: 50%;
+    max-width: 100%;
+    resize: both;
+    overflow: auto;
+}
+
+.widget-bar {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-battery {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-clock {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-doubleaxis {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-gauge {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-histogram {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-indicator {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-linechart {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-map {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-metric {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-pie {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-rosechart {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-scatter {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-slider {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-switch {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-tank {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-text {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-thermometer {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-valuestable {
+    width: 25%;
+    height: 25%;
+}
+
+.widget-variablestable {
+    width: 25%;
+    height: 25%;
+}

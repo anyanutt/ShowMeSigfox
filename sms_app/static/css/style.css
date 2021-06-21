@@ -1,0 +1,220 @@
+:root {
+  /** dark **/
+  --theme-color-dark: #292f33;
+  --theme-color-dark-rgb: 34, 36, 40;
+  --theme-color-dark-contrast: #ffffff;
+  --theme-color-dark-contrast-rgb: 255, 255, 255;
+  --theme-color-dark-shade: #22272b;
+  --theme-color-dark-tint: #384046;
+  /** medium **/
+  --theme-color-medium: #8c959a;
+  --theme-color-medium-rgb: 146, 148, 156;
+  --theme-color-medium-contrast: #ffffff;
+  --theme-color-medium-contrast-rgb: 255, 255, 255;
+  --theme-color-medium-shade: #767e83;
+  --theme-color-medium-tint: #a1abb1;
+  /** light **/
+  --theme-color-light: #f8f8f8;
+  --theme-color-light-rgb: 244, 245, 248;
+  --theme-color-light-contrast: #222428;
+  --theme-color-light-contrast-rgb: 0, 0, 0;
+  --theme-color-light-shade: #e0e0e0;
+  --theme-color-light-tint: #ffffff;
+
+  /** primary **/
+  --theme-color-primary: #63cbe7;
+  --theme-color-primary-rgb: 109, 193, 120;
+  --theme-color-primary-contrast: #ffffff;
+  --theme-color-primary-contrast-rgb: 255, 255, 255;
+  --theme-color-primary-shade: #4db2ce;
+  --theme-color-primary-tint: #9ee6fa;
+  /** secondary **/
+  --theme-color-secondary: #3dc2ff;
+  --theme-color-secondary-rgb: 61, 194, 255;
+  --theme-color-secondary-contrast: #ffffff;
+  --theme-color-secondary-contrast-rgb: 255, 255, 255;
+  --theme-color-secondary-shade: #36abe0;
+  --theme-color-secondary-tint: #50c8ff;
+  /** tertiary **/
+  --theme-color-tertiary: #5260ff;
+  --theme-color-tertiary-rgb: 82, 96, 255;
+  --theme-color-tertiary-contrast: #ffffff;
+  --theme-color-tertiary-contrast-rgb: 255, 255, 255;
+  --theme-color-tertiary-shade: #4854e0;
+  --theme-color-tertiary-tint: #6370ff;
+
+  --theme-font-opensansreg: OpenSans-Regular;
+  --theme-font-opensanslight: OpenSans-Light;
+
+  --theme-text-dark: #111111;
+  --theme-text-light: #ffffff;
+}
+
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url("../fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: OpenSans-Light;
+  src: url("../fonts/OpenSans-Light.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--theme-color-light);
+  margin: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--theme-font-opensansreg);
+}
+
+.text-light {
+  color: var(--theme-text-light);
+}
+
+.text-dark {
+  color: var(--theme-text-dark);
+}
+
+.active {
+  color: var(--theme-color-primary);
+}
+
+.header {
+  background: linear-gradient(
+    to right,
+    var(--theme-color-dark),
+    var(--theme-color-medium)
+  );
+  min-height: 75px;
+  height: fit-content;
+  box-shadow: 0 0 2px rgb(0 0 0 / 10%), 0 2px 8px rgb(0 0 0 / 20%);
+  z-index: 10;
+}
+
+.header .logo-image {
+  max-height: 40px;
+  margin-left: 80px;
+}
+
+.navbar {
+  width: fit-content;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li a {
+  font-size: 1.2rem;
+  color: var(--theme-text-light);
+  text-align: center;
+  padding: 10px 30px;
+  text-decoration: none;
+}
+
+.navbar li a:hover {
+  color: var(--theme-color-primary);
+}
+
+.navbar .active {
+  color: var(--theme-color-primary);
+}
+
+.subheader {
+  background: var(--theme-color-medium);
+  padding: 8px 80px !important;
+  font-size: 20px;
+  height: auto;
+  z-index: 0;
+}
+
+.float-button {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  top: 100px;
+  right: 40px;
+  background-color: var(--theme-color-primary);
+  color: var(--theme-text-light);
+  border-radius: 100%;
+  box-shadow: rgb(0 0 0 / 16%) 0px 2px 5px 0px, rgb(0 0 0 / 12%) 0px 2px 10px 0px;
+  display : flex;
+  align-items : center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.float-button:hover {
+  transform: rotate(90deg);
+}
+
+.float-icon {
+  font-weight: 300;
+}
+
+.displaybox {
+  padding: 20px 20px;
+  overflow: scroll;
+}
+
+#devices {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#devicestable th {
+  padding-top: 30px;
+  text-transform: uppercase;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  background: var(--theme-color-dark);
+
+  padding: 20px;
+  margin-top: 20px;
+
+  font-family: var(--theme-font-opensanslight);
+  letter-spacing: 0.03em;
+  color: var(--theme-text-light);
+  text-align: center;
+  font-size: small;
+
+  z-index: 0;
+}
