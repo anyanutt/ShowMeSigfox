@@ -1,0 +1,76 @@
+{% extends "layout_user.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/devices.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
+  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}" defer=""></script>
+{% endblock %}
+
+{% block title %}{{ device.dev_name }}{% endblock %}
+
+{% block subheader %}
+<header class="subheader text-light w3-container">
+  <div>
+    <a href="{{ url_for('user.devicespage') }}" class="text-hover-darker"><i class="fa fa-angle-left"></i> Devices</a>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+  <div class="w3-responsive displaybox-md">
+    <div class="w3-row">
+        <div class="w3-col w3-white w3-card" style="width: 250px;">
+          <div class="w3-display-container" id="dev-name">
+            <div class="text-light displaybox-lg w3-display-bottomleft"><h4>{{ device.dev_name }}</h4></div>
+          </div>
+            <form class="w3-container displaybox-lg" id="dev-info">
+              <label>Sigfox ID</label>
+              <input class="w3-input" type="text" value="{{ device.dev_id }}">
+              <br/>
+              <label>Token</label>
+              <input class="w3-input" type="password" value="{{ device.token }}" id="token-field" disabled>
+              <span toggle="#token-field" class="fa fa-fw fa-eye field-icon toggle-vis"></span>
+              <br/>
+              <label>Last Seen</label>
+              <input class="w3-input" type="text" value="{% if device.lastseen %} {{ device.lastseen }} {% else %} No last Activity {% endif %}" disabled>
+              <br/>
+              </form>        
+        </div>
+        <div class="w3-rest displaybox-lg">
+          <table class="w3-table w3-card w3-bordered  {% if messages|length %} w3-hoverable {% endif%}" id="messagestable">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            {% if messages|length %}
+            {% for message in messages %}
+              <tr class="w3-hover-light-grey">
+                <td>{{ message.time }}</td>
+                <td>{{ message.data }}</td>
+              </tr>
+            {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="2">No Messages to display</td>
+              </tr>
+            {% endif%}
+          </table>
+        </div>
+    </div>          
+  </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal fade">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+{% endblock %}

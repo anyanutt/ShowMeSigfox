@@ -1,17 +1,12 @@
 from flask import Blueprint, render_template, redirect, url_for
 
 home = Blueprint('home', __name__)
-
-menu = {
-    "Home": "home",
-    "About" : "about",
-    "Contact": "contact"
-}
-        
-
+      
+"""
 @home.context_processor
 def populate_menu():
     return dict(menu = menu)
+"""
 
 @home.route('/home')
 def homepage():

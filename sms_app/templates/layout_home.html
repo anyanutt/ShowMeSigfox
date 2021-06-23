@@ -14,30 +14,27 @@
 </head>
 
 <body>
-  <header class="header w3-display-container">
-    <a href="devices" class="w3-display-left">
+  <header class="header text-light w3-display-container">
+    <a href="{{ url_for('home.homepage') }}" class="w3-display-left">
       <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
     </a>
 
     <span class="navbar w3-display-middle ">
       <ul>
-        {% for name, href in menu.items() %}
-        <li><a href="{{ href }}" {% if name==self.title() %} class="active" {% endif %}>{{ name }}</a></li>
-        {% endfor %}
+        <li><a href="#Home" {% if name==self.title() %} class="active" {% endif %}>Home</a></li>
+        <li><a href="#About" {% if name==self.title() %} class="active" {% endif %}>About</a></li>
+        <li><a href="#Contact" {% if name==self.title() %} class="active" {% endif %}>Contact</a></li>
       </ul>
     </span>
 
     <!-- TODO: insert user icon -->
 
   </header>
-  <div>{% block subheader %}{% endblock %}</div>
-  
-  
-  
+  <div>{% block subheader %}{% endblock %}</div>  
 
   <div id="content">{% block content %}{% endblock %}</div>
 
-  <footer class="footer">
+  <footer class="footer text-light">
     &copy; 2021 ShowMeSigfox | Anya Nutt
   </footer>
 </body>

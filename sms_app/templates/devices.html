@@ -1,7 +1,8 @@
-{% extends "boilerplate.html" %}
+{% extends "layout_user.html" %}
 
 {% block head %}
   {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/devices.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}" defer=""></script>
@@ -12,7 +13,7 @@
   <div>
     {% block title %}Devices{% endblock %}
     <div  style="position: relative;">
-      <a href="#" class="float-button">
+      <a href="#" class="float-button" id="newdev_btn">
         <i class="fa fa-plus float-icon"></i>
       </a>
     </div>
@@ -21,7 +22,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="w3-responsive displaybox" id="devices">
+  <div class="w3-responsive displaybox-sm" id="devices-box">
     <table class="w3-table w3-card w3-bordered w3-hoverable" id="devicestable">
       <thead>
         <tr>
@@ -35,9 +36,9 @@
       {% for device in devices %}
         <tr class="w3-hover-light-grey">
           <td><input type="checkbox" name="cb{{ device.dev_id}}" /></td>
-          <td>{{ device.dev_name }}</td>
+          <td><a href="{{ url_for('user.device_idv_page', oid=device._id) }}" class="devclick">{{ device.dev_name }}</a></td>
           <td>{{ device.dev_id }}</td>
-          <td><button id="myBtn">Open Modal</button></td>
+          <td>{% if device.lastseen %} {{ device.lastseen }} {% else %} No last Activity {% endif %}</td>
           <td></td>
         </tr>
       {% endfor %}

@@ -1,47 +1,30 @@
 :root {
   /** dark **/
   --theme-color-dark: #292f33;
-  --theme-color-dark-rgb: 34, 36, 40;
   --theme-color-dark-contrast: #ffffff;
-  --theme-color-dark-contrast-rgb: 255, 255, 255;
   --theme-color-dark-shade: #22272b;
   --theme-color-dark-tint: #384046;
   /** medium **/
   --theme-color-medium: #8c959a;
-  --theme-color-medium-rgb: 146, 148, 156;
   --theme-color-medium-contrast: #ffffff;
-  --theme-color-medium-contrast-rgb: 255, 255, 255;
   --theme-color-medium-shade: #767e83;
   --theme-color-medium-tint: #a1abb1;
   /** light **/
   --theme-color-light: #f8f8f8;
-  --theme-color-light-rgb: 244, 245, 248;
   --theme-color-light-contrast: #222428;
-  --theme-color-light-contrast-rgb: 0, 0, 0;
   --theme-color-light-shade: #e0e0e0;
   --theme-color-light-tint: #ffffff;
 
   /** primary **/
   --theme-color-primary: #63cbe7;
-  --theme-color-primary-rgb: 109, 193, 120;
   --theme-color-primary-contrast: #ffffff;
-  --theme-color-primary-contrast-rgb: 255, 255, 255;
   --theme-color-primary-shade: #4db2ce;
   --theme-color-primary-tint: #9ee6fa;
   /** secondary **/
   --theme-color-secondary: #3dc2ff;
-  --theme-color-secondary-rgb: 61, 194, 255;
   --theme-color-secondary-contrast: #ffffff;
-  --theme-color-secondary-contrast-rgb: 255, 255, 255;
   --theme-color-secondary-shade: #36abe0;
   --theme-color-secondary-tint: #50c8ff;
-  /** tertiary **/
-  --theme-color-tertiary: #5260ff;
-  --theme-color-tertiary-rgb: 82, 96, 255;
-  --theme-color-tertiary-contrast: #ffffff;
-  --theme-color-tertiary-contrast-rgb: 255, 255, 255;
-  --theme-color-tertiary-shade: #4854e0;
-  --theme-color-tertiary-tint: #6370ff;
 
   --theme-font-opensansreg: OpenSans-Regular;
   --theme-font-opensanslight: OpenSans-Light;
@@ -94,12 +77,45 @@ h6 {
   color: var(--theme-text-light);
 }
 
+.text-medium {
+  color: var(--theme-color-medium);
+}
+
 .text-dark {
   color: var(--theme-text-dark);
 }
 
+.text-primary {
+  color: var(--theme-color-primary);
+}
+
+.text-hover-darker:hover {
+  color: var(--theme-color-light-shade);
+}
+
 .active {
   color: var(--theme-color-primary);
+}
+
+.bg-primary {
+  background-color: var(--theme-color-primary);
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--theme-color-medium);
+}
+
+input:disabled {
+  background-color: inherit;
+}
+
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
 }
 
 .header {
@@ -111,7 +127,7 @@ h6 {
   min-height: 75px;
   height: fit-content;
   box-shadow: 0 0 2px rgb(0 0 0 / 10%), 0 2px 8px rgb(0 0 0 / 20%);
-  z-index: 10;
+  z-index: 1;
 }
 
 .header .logo-image {
@@ -159,6 +175,10 @@ h6 {
   z-index: 0;
 }
 
+.subheader a {
+  text-decoration: none;
+}
+
 .float-button {
   position: fixed;
   width: 50px;
@@ -184,23 +204,23 @@ h6 {
   font-weight: 300;
 }
 
-.displaybox {
-  padding: 20px 20px;
+.displaybox-sm {
+  padding: 20px 10%;
   overflow: scroll;
 }
 
-#devices {
-  padding-left: 10%;
-  padding-right: 10%;
+.displaybox-md {
+  padding: 20px 5%;
+  overflow: scroll;
 }
 
-#devicestable th {
-  padding-top: 30px;
-  text-transform: uppercase;
+.displaybox-lg {
+  padding: 20px 20px 0px;
+  overflow: scroll;
 }
 
 .footer {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -212,7 +232,6 @@ h6 {
 
   font-family: var(--theme-font-opensanslight);
   letter-spacing: 0.03em;
-  color: var(--theme-text-light);
   text-align: center;
   font-size: small;
 
