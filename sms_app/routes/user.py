@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, jsonify
 from bson.objectid import ObjectId
+import datetime
 
-from sms_app.extensions import mongo
+from sms_app.extensions import mongo 
+from sms_app.functions import timeToStr, sortTimeAsc, sortTimeDec
 
 user = Blueprint('user', __name__)
 
@@ -18,18 +20,33 @@ def mainpage():
 @user.route('/devices')
 def devicespage():
     devices_collection = mongo.db.devices
-    devices = devices_collection.find()
+    devices_cur = devices_collection.find()
+    devices = []
+    for i in devices_cur:
+        if 'lastseen' in i:
+            i['lastseen'] = timeToStr(i['lastseen'])
+        else:
+            i['lastseen'] = 'No last Activity'
+        devices.append(i)
     return render_template('devices.html', devices=devices)
 
 @user.route('/devices/<oid>')
 def device_idv_page(oid):
     devices_collection = mongo.db.devices
-    messages_collection = mongo.db.messages
     device = devices_collection.find_one({ '_id' : ObjectId(oid) })
+    if 'lastseen' in device:
+        device['lastseen'] = timeToStr(device['lastseen'])
+    else:
+        device['lastseen'] = 'No last Activity'
+
+    messages_collection = mongo.db.messages
     messages_cur = messages_collection.find( { 'dev_id' : device['dev_id']} )
     messages = []
     for i in messages_cur:
+        i['time'] = timeToStr(i['time'])
         messages.append(i)
+    messages = sortTimeDec(messages)
+
     return render_template('dev_idv.html', device=device, messages=messages)
 
 @user.route('/data')

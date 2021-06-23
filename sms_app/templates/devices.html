@@ -38,7 +38,7 @@
           <td><input type="checkbox" name="cb{{ device.dev_id}}" /></td>
           <td><a href="{{ url_for('user.device_idv_page', oid=device._id) }}" class="devclick">{{ device.dev_name }}</a></td>
           <td>{{ device.dev_id }}</td>
-          <td>{% if device.lastseen %} {{ device.lastseen }} {% else %} No last Activity {% endif %}</td>
+          <td>{{ device.lastseen }}</td>
           <td></td>
         </tr>
       {% endfor %}
