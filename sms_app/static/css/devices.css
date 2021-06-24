@@ -1,4 +1,4 @@
-/* for devices.html */ 
+/* for devices.html */
 
 #devicestable th {
   padding-top: 30px;
@@ -16,56 +16,85 @@
   text-decoration: underline;
 }
 
-/* for dev_idv.html */ 
+/* for dev_idv.html */
 
 #dev-displaybox {
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
 #dev-card {
   width: 250px;
+  min-width: 250px;
   flex-basis: auto;
 }
 
 #dev-name {
   margin: 0;
   height: 100px;
-  background: linear-gradient(
-    to bottom,
-    var(--theme-color-primary),
-    var(--theme-color-primary-shade));
-}
-
-#dev-info {
-  color: var(--theme-color-medium-shade);
-  font-size: 14px;
-}
-
-#dev-info input {
-  color: var(--theme-color-dark-tint);
-  padding: 0px;
 }
 
 #dev-right {
-  flex-direction: column;
   margin-left: 50px;
-  flex-grow: 2;
+  flex: 1 1 auto;
 }
 
 #msgs-card {
   max-height: 250px;
-  overflow: scroll;
-  overflow-y: visible;
+  min-width: 300px;
+  overflow-y: scroll;
 }
 
 #vars-displaybox {
-  flex: row wrap;
+  flex: 0 1 auto;
+  flex-flow: row wrap;
   align-content: flex-start;
+  margin: 0 -10px;
+  max-width: inherit;
 }
 
-.var-box {
-  width: 290px;
-  height: 200px;
+.var-card {
+  flex: 0 1 auto;
+  width: 240px;
+  height: 150px;
+  margin: 0 10px 20px;
+  cursor: pointer;
+}
+
+.var-card header {
+  height: 100px;
+}
+
+#var-new {
+  color: var(--theme-color-medium);
+  border: 2px dashed var(--theme-color-medium);
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+#var-new:hover  {
+  color: var(--theme-color-medium-shade);
+  border-color: var(--theme-color-medium-shade);
+}
+
+#varnew-icon {
+  margin-top: 10px;
+  background-color: var(--theme-color-medium);
+  color: var(--theme-text-light);
+}
+
+#var-new:hover #varnew-icon {
+  background-color: var(--theme-color-medium-shade);
+}
+
+#varnew-text {
+  margin: 8px auto 0px;
+}
+
+
+/* for new variable modal*/
+#var-name {
+  background-color: transparent;
+  text-align: center;
 }

@@ -10,7 +10,7 @@
   <div>
     {% block title %}Data{% endblock %}
     <div  style="position: relative;">
-      <a href="#" class="float-button">
+      <a href="#" class="round-button float-button">
         <i class="fa fa-plus float-icon"></i>
       </a>
     </div>
@@ -21,12 +21,21 @@
 {% block content %}
   <div id="widgets" class="displaybox">
 
-    {% for i in [1, 2, 3] %}
+    
     <div class="widget-default w3-card">
-      <div class="w3-container"> Widget {{ i }}
+      <div class="w3-container"> 
+        <canvas id="myChart" width="100%" height="100%"></canvas>
+        <script> var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Phase 1 power', 'Phase 1 power'],
+    datasets: [ '340', '259'    ]
+  }
+});
+</script>
       </div>        
     </div>
-    {% endfor %}
   </div>
   
 {% endblock %}

@@ -20,35 +20,34 @@
 {% endblock %}
 
 {% block content %}
-<div class="w3-responsive displaybox-md">
-  <div class="flex-container" id="dev-displaybox">
-    <div class="w3-white w3-card" id="dev-card">
-      <div class="w3-display-container" id="dev-name">
+<div class="w3-responsive displaybox-sm">
+  <div class="flex-group-x" id="dev-displaybox">
+    <form class="w3-white w3-card" id="dev-form">
+      <header class="w3-display-container bg-primary-grad" id="dev-name">
         <div class="text-light displaybox-lg w3-display-bottomleft">
           <h4>{{ device.dev_name }}</h4>
         </div>
-      </div>
-      <form class="w3-container" id="dev-info">
-        <br />
+      </header>
+      <div class="w3-container">
         <label>Sigfox ID</label>
         <input class="w3-input" type="text" value="{{ device.dev_id }}">
-        <br />
+
         <label>Token</label>
         <input class="w3-input" type="password" value="{{ device.token }}" id="token-field" disabled>
         <span toggle="#token-field" class="fa fa-fw fa-eye field-icon toggle-vis"></span>
-        <br />
+
         <label>Last Seen</label>
         <input class="w3-input" type="text" value="{{ device.lastseen }}" disabled>
-        <br />
-      </form>
-    </div>
 
-    <div class="flex-container" id="dev-right">
+      </div>
+    </form>
+
+    <div class="flex-group-y" id="dev-right">
       <div class="w3-card w3-white" id="msgs-card">
         <header class="tableheader">
           <h4>Received Messages</h4>
         </header>
-        <table class="w3-table w3-bordered  {% if messages|length %} w3-hoverable {% endif%}" id="messagestable">
+        <table class="w3-table w3-bordered" id="messagestable">
           <thead>
             <tr>
               <th>Time</th>
@@ -57,7 +56,7 @@
           </thead>
           {% if messages|length %}
           {% for message in messages %}
-          <tr class="w3-hover-light-grey">
+          <tr>
             <td>{{ message.time }}</td>
             <td>{{ message.data }}</td>
           </tr>
@@ -78,26 +77,79 @@
           <h4>Variables</h4>
         </header>
         <div class="flex-container" id="vars-displaybox">
-          <div>
+          {% for variable in variables %}
+          <div class="var-card w3-card">
+            <header class="w3-display-container bg-secondary-grad">
+              <div class="text-light displaybox-lg w3-display-bottomleft">
+                <h4>{{ variable.var_name }} [{{ variable.unit }}]</h4>
+              </div>
+            </header>
+          </div>
+          {% endfor %}
 
+          <div class="var-card w3-display-container" id="var-new"
+            onclick="document.getElementById('modal-newvar').style.display='block'">
+            <div class="w3-display-middle">
+              <div class="w3-center">
+                <a href="#" class="centered round-button" id="varnew-icon">
+                  <i class="fa fa-plus"></i>
+                </a>
+                <h6>Add Variable</h6>
+              </div>
+            </div>
           </div>
 
-
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal fade">
+<!-- New Variable Modal -->
+<div class="w3-modal" id="modal-newvar">
+  <form class="w3-modal-content w3-card-4 w3-animate-opacity" id="modal-form">
+    <header class="modal-header w3-display-container bg-secondary-grad text-light">
+      <button type="reset" onclick="document.getElementById('modal-newvar').style.display='none'"
+        class="close-button w3-button w3-padding w3-display-topright" >&times;</button>
+      <div class="w3-display-middle">
+        <div class="w3-center">
+          <h4>{{ device.dev_name }}</h4>
+          <h3><input class="w3-input text-light" type="text" placeholder="New Variable" id="var-name"></h3><span class="fa fa-fw fa-pencil field-icon"></span>
+        </div>
+      </div>
+    </header>
+    <div class="w3-container">
+      <div class="w3-container" >
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
+        <label>Data source</label>
+        <select class="w3-select" name="option">
+          <option value="" disabled selected>Choose a field</option>
+          {% for field in fields %}
+          <option value="{{field}}">{{field}}</option>
+          {% endfor %}
+        </select>
 
+        <label>Type</label>
+        <select class="w3-select" name="option">
+          <option value="Raw" selected>Raw</option>
+          <option value="Average">Average</option>
+          <option value="Minimum">Minimum</option>
+          <option value="Maximum">Maximum</option>
+          <option value="Sum">Sum</option>
+          <option value="Count">Count</option>
+        </select>
+
+        <label>Unit</label>
+        <input class="w3-input" type="text" placeholder="Add unit" value="">
+
+      </div>
+    </div>
+    <footer class="w3-container w3-border-top w3-padding w3-center">
+      <button onclick="document.getElementById('modal-newvar').style.display='none'" 
+      class="w3-button w3-light-grey" type="reset" name="cancel">Cancel</button>
+      <button class="w3-button w3-light-grey" type="submit" name="add variable">Create variable</button>
+    </footer>
+  </form>
 </div>
+
 {% endblock %}

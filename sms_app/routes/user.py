@@ -40,14 +40,18 @@ def device_idv_page(oid):
         device['lastseen'] = 'No last Activity'
 
     messages_collection = mongo.db.messages
-    messages_cur = messages_collection.find( { 'dev_id' : device['dev_id']} )
+    messages_cur = messages_collection.find({ 'dev_id' : device['dev_id'] })
     messages = []
     for i in messages_cur:
         i['time'] = timeToStr(i['time'])
         messages.append(i)
     messages = sortTimeDec(messages)
+    fields = messages[0].keys()
 
-    return render_template('dev_idv.html', device=device, messages=messages)
+    variables_collection = mongo.db.variables
+    variables = variables_collection.find({ 'dev_id' : oid })
+
+    return render_template('dev_idv.html', device=device, messages=messages, fields=fields, variables=variables)
 
 @user.route('/data')
 def datapage():
