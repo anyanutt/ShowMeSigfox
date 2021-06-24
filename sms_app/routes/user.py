@@ -46,7 +46,10 @@ def device_idv_page(oid):
         i['time'] = timeToStr(i['time'])
         messages.append(i)
     messages = sortTimeDec(messages)
-    fields = messages[0].keys()
+
+    fields = []
+    if len(messages) > 0:
+        fields = messages[0].keys()
 
     variables_collection = mongo.db.variables
     variables = variables_collection.find({ 'dev_id' : oid })
