@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/lib/jquery.js') }}" defer=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/w3.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,18 +17,13 @@
 
 <body>
   <header class="headermain text-light w3-display-container">
-    <a href="{{ url_for('user.devicespage') }}" class="w3-display-left">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
-    </a>
+    {% block logo %}{% endblock %}
 
     <span class="navbar w3-display-middle ">
-      <ul>
-        <li><a href="{{ url_for('user.devicespage') }}" {% if name==self.title() %} class="active" {% endif %}>Devices</a></li>
-        <li><a href="{{ url_for('user.datapage') }}" {% if name==self.title() %} class="active" {% endif %}>Data</a></li>
-      </ul>
+      {% block navbar %}{% endblock %}
     </span>
 
-    <!-- TODO: insert user icon -->
+    {% block account %}{% endblock %}
 
   </header>
   <div class="text-light">{% block subheader %}{% endblock %}</div>  

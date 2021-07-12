@@ -1,4 +1,4 @@
-{% extends "layout_user.html" %}
+{% extends "layout.html" %}
 
 {% block head %}
 {{ super() }}
@@ -10,6 +10,25 @@
 {% endblock %}
 
 {% block title %}{{ device.dev_name }}{% endblock %}
+
+{% block logo %}
+<a href="{{ url_for('user.devicespage') }}" class="w3-display-left">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
+</a>
+{% endblock %}
+
+{% block navbar %}
+<ul>
+  <li><a href="{{ url_for('user.devicespage') }}" class="active">Devices</a></li>
+  <li><a href="{{ url_for('user.datapage') }}">Dashboard</a></li>
+</ul>
+{% endblock %}
+
+{% block account %}
+<a href="{{ url_for('user.accountpage') }}" class="w3-display-right">
+  <img src="{{ url_for('static', filename='img/default/avatar.png') }}" class="account-image round-button">
+</a>
+{% endblock %}
 
 {% block subheader %}
 <header class="subheader text-light w3-container">
@@ -131,7 +150,7 @@
 
         <label>Type</label>
         <select class="w3-select" name="option">
-          <option value="Raw" selected>Raw</option>
+          <option value="None" selected>None</option>
           <option value="Average">Average</option>
           <option value="Minimum">Minimum</option>
           <option value="Maximum">Maximum</option>

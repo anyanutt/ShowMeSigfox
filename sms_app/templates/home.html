@@ -1,4 +1,4 @@
-{% extends "layout_home.html" %}
+{% extends "layout.html" %}
 
 {% block head %}
   {{ super() }}
@@ -6,6 +6,20 @@
 
 {% block subheader %}
   <h3>{% block title %}Home{% endblock %}</h3>
+{% endblock %}
+
+{% block logo %}
+<a href="{{ url_for('home.homepage') }}" class="w3-display-left">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
+</a>
+{% endblock %}
+
+{% block navbar %}
+<ul>
+  <li><a href="#Home" {% if name==self.title() %} class="active" {% endif %}>Home</a></li>
+  <li><a href="#About" {% if name==self.title() %} class="active" {% endif %}>About</a></li>
+  <li><a href="#Contact" {% if name==self.title() %} class="active" {% endif %}>Contact</a></li>
+</ul>
 {% endblock %}
 
 {% block content %}

@@ -286,6 +286,12 @@ header ::placeholder {
   margin-left: 80px;
 }
 
+.headermain .account-image {
+  max-height: 40px;
+  max-width: 40px;
+  margin-right: 80px;
+}
+
 .navbar {
   width: fit-content;
 }

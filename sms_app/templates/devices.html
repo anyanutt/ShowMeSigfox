@@ -1,4 +1,4 @@
-{% extends "layout_user.html" %}
+{% extends "layout.html" %}
 
 {% block head %}
   {{ super() }}
@@ -6,6 +6,25 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
   <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}" defer=""></script>
+{% endblock %}
+
+{% block logo %}
+<a href="{{ url_for('user.devicespage') }}" class="w3-display-left">
+  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
+</a>
+{% endblock %}
+
+{% block navbar %}
+<ul>
+  <li><a href="{{ url_for('user.devicespage') }}" class="active">Devices</a></li>
+  <li><a href="{{ url_for('user.datapage') }}">Dashboard</a></li>
+</ul>
+{% endblock %}
+
+{% block account %}
+<a href="{{ url_for('user.accountpage') }}" class="w3-display-right">
+  <img src="{{ url_for('static', filename='img/default/avatar.png') }}" class="account-image round-button">
+</a>
 {% endblock %}
 
 {% block subheader %}
@@ -37,7 +56,7 @@
         <tr class="w3-hover-light-grey">
           <td><input type="checkbox" name="cb{{ device.dev_id}}" /></td>
           <td><a href="{{ url_for('user.device_idv_page', oid=device._id) }}" class="devclick">{{ device.dev_name }}</a></td>
-          <td>{{ device.dev_id }}</td>
+          <td>{{ device.sigfox_id }}</td>
           <td>{{ device.lastseen }}</td>
           <td></td>
         </tr>

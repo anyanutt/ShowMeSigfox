@@ -7,11 +7,11 @@ def createToken():
 def timeToStr(time):
     return datetime.datetime.fromtimestamp(int(time)).strftime('%Y-%m-%d %H:%M:%S')
 
-def sortKey(e):
+def sortTimeKey(e):
     return e['time']
 
 def sortTimeAsc(list):
-    return sorted(list, key=sortKey)
+    return sorted(list, key=sortTimeKey)
 
 def sortTimeDec(list):
-    return sorted(list, reverse=True, key=sortKey)
+    return sorted(list, reverse=True, key=sortTimeKey)

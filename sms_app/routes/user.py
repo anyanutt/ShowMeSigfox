@@ -20,9 +20,9 @@ def mainpage():
 @user.route('/devices')
 def devicespage():
     devices_collection = mongo.db.devices
-    devices_cur = devices_collection.find()
+    devices_cursor = devices_collection.find()
     devices = []
-    for i in devices_cur:
+    for i in devices_cursor:
         if 'lastseen' in i:
             i['lastseen'] = timeToStr(i['lastseen'])
         else:
@@ -40,9 +40,9 @@ def device_idv_page(oid):
         device['lastseen'] = 'No last Activity'
 
     messages_collection = mongo.db.messages
-    messages_cur = messages_collection.find({ 'dev_id' : device['dev_id'] })
+    messages_cursor = messages_collection.find({ 'sigfox_id' : device['sigfox_id'] })
     messages = []
-    for i in messages_cur:
+    for i in messages_cursor:
         i['time'] = timeToStr(i['time'])
         messages.append(i)
     messages = sortTimeDec(messages)
@@ -58,4 +58,8 @@ def device_idv_page(oid):
 
 @user.route('/data')
 def datapage():
+    return render_template('data.html')
+
+@user.route('/account')
+def accountpage():
     return render_template('data.html')
