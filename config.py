@@ -10,8 +10,6 @@ class Config(object):
     MONGO_PASS = os.environ.get('MONGO_PASS')
     MONGO_URI='mongodb+srv://dbAdmin:{}@cluster0.kqkws.mongodb.net/showmesigfox_db?retryWrites=true&w=majority'.format(MONGO_PASS)
 
-    SERVER_NAME=os.environ.get('SERVER_NAME') or 'showmesigfox.xyz'
-
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 587)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
