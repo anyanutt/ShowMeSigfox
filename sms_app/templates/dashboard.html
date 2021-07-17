@@ -1,0 +1,44 @@
+{% extends "_layout.html" %}
+
+{% block subheader %}
+<header class="subheader text-light w3-container">
+    <div>
+        <div>
+            <a href="#" class="text-hover-darker"><i class="fa fa-bars"></i> Dashboards</a>
+        </div>
+        <div style="position: relative;">
+            <a href="{{ url_for('main.add_widget') }}" class="round-button float-button" id="newdev_btn">
+                <i class="fa fa-plus float-icon"></i>
+            </a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block app_content %}
+<div id="widgets" class="displaybox-lg">
+    {% for widget in widgets %}
+    <div class="var-card w3-card">
+        <a href="#">
+            <header class="w3-display-container bg-secondary-grad">
+                <div class="text-light displaybox-lg w3-display-bottomleft">
+                    <h4>{{ widget.name }}</h4>
+                </div>
+            </header>
+        </a>
+    </div>
+    {% endfor %}
+
+    <div class="var-card w3-display-container" id="var-new"
+        onclick="document.getElementById('modal-newvar').style.display='block'">
+        <div class="w3-display-middle">
+            <div class="w3-center">
+                <a href="{{ url_for('main.add_widget') }}" class="centered round-button" id="varnew-icon">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <h6>Add Widget</h6>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "_layout.html" %}
+
+{% block subheader %}
+<header class="subheader text-light w3-container">
+    <div>
+        {{ title }}
+        <div style="position: relative;">
+            <a href="{{ url_for('main.add_dashboard') }}" class="round-button float-button" id="newdev_btn">
+                <i class="fa fa-plus float-icon"></i>
+            </a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block app_content %}
+<div id="widgets" class="displaybox-lg">
+    {% for widget in widgets %}
+    <div class="var-card w3-card">
+        <a href="#">
+            <header class="w3-display-container bg-secondary-grad">
+                <div class="text-light displaybox-lg w3-display-bottomleft">
+                    <h4>{{ widget.name }}</h4>
+                </div>
+            </header>
+        </a>
+    </div>
+    {% endfor %}
+
+    <div class="widget-card w3-card">
+        <h6>Bar Chart</h6>
+        <canvas id="myChart" width="450px" height="200px"></canvas>
+        <script>
+            var values = {{values | safe}};
+            var dates = {{dates | safe}};
+    
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Phase 1 power [kWh]',
+                        data: values,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+    </div>
+
+
+</div>
+{% endblock %}

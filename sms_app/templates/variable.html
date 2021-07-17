@@ -1,0 +1,38 @@
+{% extends "_layout.html" %}
+
+{% block subheader %}
+<header class="subheader text-light w3-container">
+    <div>
+        <a href="{{ url_for('main.device_idv', _id=variable.dev_id) }}" class="text-hover-darker"><i class="fa fa-angle-left"></i> {{ dev_name }}</a>
+    </div>
+</header>
+{% endblock %}
+
+{% block app_content %}
+<div class="w3-responsive displaybox-sm">
+    <div class="flex-group-x" id="dev-displaybox">
+        <form class="w3-white w3-card" id="dev-form">
+            <header class="w3-display-container bg-secondary-grad" id="dev-name">
+                <div class="text-light displaybox-lg w3-display-bottomleft">
+                    <h4>{{ variable.var_name }}</h4>
+                </div>
+            </header>
+            <div class="w3-container">
+                <label>Sigfox ID</label>
+                <input class="w3-input" type="text" value="{{ variable.var_name }}">
+
+                <label>Last Seen</label>
+                <input class="w3-input" type="text" value="{{ variable.var_name }}" disabled>
+
+            </div>
+        </form>
+
+        <div class="flex-group-y" id="dev-right">
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

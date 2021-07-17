@@ -1,77 +1,53 @@
-{% extends "layout.html" %}
-
-{% block head %}
-  {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/devices.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
-  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
-  <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}" defer=""></script>
-{% endblock %}
-
-{% block logo %}
-<a href="{{ url_for('user.devicespage') }}" class="w3-display-left">
-  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
-</a>
-{% endblock %}
-
-{% block navbar %}
-<ul>
-  <li><a href="{{ url_for('user.devicespage') }}" class="active">Devices</a></li>
-  <li><a href="{{ url_for('user.datapage') }}">Dashboard</a></li>
-</ul>
-{% endblock %}
-
-{% block account %}
-<a href="{{ url_for('user.accountpage') }}" class="w3-display-right">
-  <img src="{{ url_for('static', filename='img/default/avatar.png') }}" class="account-image round-button">
-</a>
-{% endblock %}
+{% extends "_layout.html" %}
 
 {% block subheader %}
 <header class="subheader text-light w3-container">
-  <div>
-    {% block title %}Devices{% endblock %}
-    <div  style="position: relative;">
-      <a href="#" class="round-button float-button" id="newdev_btn">
-        <i class="fa fa-plus float-icon"></i>
-      </a>
+    <div>
+        {{ title }}
+        <div style="position: relative;">
+            <a href="{{ url_for('main.add_device') }}" class="round-button float-button" id="newdev_btn">
+                <i class="fa fa-plus float-icon"></i>
+            </a>
+        </div>
     </div>
-  </div>
 </header>
 {% endblock %}
 
-{% block content %}
-  <div class="w3-responsive displaybox-sm" id="devices-box">
+{% block app_content %}
+<div class="w3-responsive displaybox-sm" id="devices-box">
     <table class="w3-table w3-card w3-bordered w3-hoverable" id="devicestable">
-      <thead>
-        <tr>
-          <th><input type="checkbox" name="selectall" onchange="selectAll(this)"/></th>
-          <th>Name</th>
-          <th>Device ID</th>
-          <th>Last Activity</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      {% for device in devices %}
+        <thead>
+            <tr>
+                <th><input type="checkbox" name="selectall" onchange="selectAll(this)" /></th>
+                <th>Name</th>
+                <th>Device ID</th>
+                <th>Last Activity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% if devices|length %}
+        {% for device in devices %}
         <tr class="w3-hover-light-grey">
-          <td><input type="checkbox" name="cb{{ device.dev_id}}" /></td>
-          <td><a href="{{ url_for('user.device_idv_page', oid=device._id) }}" class="devclick">{{ device.dev_name }}</a></td>
-          <td>{{ device.sigfox_id }}</td>
-          <td>{{ device.lastseen }}</td>
-          <td></td>
+            <td><input type="checkbox" name="cb{{ device.sigfox_id}}" /></td>
+            <td><a href="{{ url_for('main.device_idv', _id=device._id) }}" class="devclick">{{ device.dev_name }}</a></td>
+            <td>{{ device.sigfox_id }}</td>
+            <td>{{ device.lastseen }}</td>
+            <td>
+                <a href="#">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <a href="{{ url_for('main.delete_device', _id=device._id) }}">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
         </tr>
-      {% endfor %}
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td></td>
+            <td colspan="4">No devices to display - <a href="{{ url_for('main.add_device') }}">Add a new device</a></td>
+        </tr>
+        {% endif%}
     </table>
-  </div>
-
-<!-- The Modal -->
-<div id="myModal" class="modal fade">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
 </div>
 {% endblock %}

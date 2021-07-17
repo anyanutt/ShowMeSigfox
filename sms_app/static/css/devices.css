@@ -62,6 +62,16 @@
   cursor: pointer;
 }
 
+.widget-card {
+  flex: 0 1 auto;
+  width: 600px;
+  height: 300px;
+  margin: 0 10px 20px;
+  cursor: pointer;
+  resize: both;
+  overflow: auto;
+}
+
 .var-card header {
   height: 100px;
 }

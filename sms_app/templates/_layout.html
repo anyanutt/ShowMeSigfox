@@ -1,0 +1,93 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block html_attribs %} lang="en-us"{% endblock html_attribs %}
+
+
+{% block title %}
+{% if title %}{{ title }} | ShowMeSigfox{% else %}Welcome to ShowMeSigfox{% endif %}
+{% endblock title %}
+
+{% block metas %}
+{{ super() }}
+<meta charset="utf-8">
+{% endblock metas %}
+
+{% block styles %}
+{{ super() }}
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon/favicon-16.png') }}" sizes="16x16">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon/favicon-32.png') }}" sizes="32x32">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon/favicon-96.png') }}" sizes="96x96">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/lib/w3.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/devices.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock styles %}
+
+{% block navbar %}
+<header class="headermain {% if title %} shadow {% endif %} bg-dark-grad text-light w3-display-container">
+  <span class="w3-display-left">
+    <a href="{{ url_for('main.index') }}">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
+    </a>
+  </span>
+  <span class="sms-navbar w3-display-middle">
+    {% if current_user.is_authenticated %}
+    <ul>
+      <li><a href="{{ url_for('main.devices') }}" {% if title=='Devices' %} class="active" {% endif %}>Devices</a></li>
+      <li><a href="{{ url_for('main.dashboard') }}" {% if title=='Dashboard' %} class="active" {% endif %}>Dashboard</a></li>
+    </ul>
+    {% else %}
+    <ul>
+      <li><a href="#Home">Home</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Contact">Contact</a></li>
+    </ul>
+    {% endif %}
+  </span>
+  <span class="sms-navbar w3-display-right">
+    {% if current_user.is_authenticated %}
+    <ul>
+      <li><a href="{{ url_for('main.account') }}">Account</a></li>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+    </ul>
+    {% else %}
+    <ul>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+      <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+    </ul>
+    {% endif %}
+  </span>
+</header>
+{% endblock navbar %}
+
+{% block content %}
+{% block subheader %}{% endblock %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-info" role="alert">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+<div id="content">{% block app_content %}{% endblock %}</div>
+
+<footer class="footermain bg-dark text-light">
+  &copy; 2021 ShowMeSigfox | Anya Nutt
+</footer>
+
+{% block modal %}{% endblock modal %}
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+<script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
+<script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}"
+  defer=""></script>
+{% endblock scripts %}

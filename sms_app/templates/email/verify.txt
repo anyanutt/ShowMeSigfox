@@ -1,0 +1,7 @@
+Welcome to ShowMeSigfox!
+
+Please follow this link to activate your account:
+
+{{ confirm_url }}
+
+Cheers!

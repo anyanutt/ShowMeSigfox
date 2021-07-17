@@ -1,174 +1,94 @@
-{% extends "layout.html" %}
-
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/devices.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/modals.css') }}">
-<script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/misc.js') }}" defer=""></script>
-<script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/modals.js') }}"
-  defer=""></script>
-{% endblock %}
-
-{% block title %}{{ device.dev_name }}{% endblock %}
-
-{% block logo %}
-<a href="{{ url_for('user.devicespage') }}" class="w3-display-left">
-  <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-image">
-</a>
-{% endblock %}
-
-{% block navbar %}
-<ul>
-  <li><a href="{{ url_for('user.devicespage') }}" class="active">Devices</a></li>
-  <li><a href="{{ url_for('user.datapage') }}">Dashboard</a></li>
-</ul>
-{% endblock %}
-
-{% block account %}
-<a href="{{ url_for('user.accountpage') }}" class="w3-display-right">
-  <img src="{{ url_for('static', filename='img/default/avatar.png') }}" class="account-image round-button">
-</a>
-{% endblock %}
+{% extends "_layout.html" %}
 
 {% block subheader %}
 <header class="subheader text-light w3-container">
-  <div>
-    <a href="{{ url_for('user.devicespage') }}" class="text-hover-darker"><i class="fa fa-angle-left"></i> Devices</a>
-  </div>
-</header>
+    <div>
+      <a href="{{ url_for('main.devices') }}" class="text-hover-darker"><i class="fa fa-angle-left"></i> Devices</a>
+    </div>
+  </header>
 {% endblock %}
 
-{% block content %}
+{% block app_content %}
 <div class="w3-responsive displaybox-sm">
-  <div class="flex-group-x" id="dev-displaybox">
-    <form class="w3-white w3-card" id="dev-form">
-      <header class="w3-display-container bg-primary-grad" id="dev-name">
-        <div class="text-light displaybox-lg w3-display-bottomleft">
-          <h4>{{ device.dev_name }}</h4>
-        </div>
-      </header>
-      <div class="w3-container">
-        <label>Sigfox ID</label>
-        <input class="w3-input" type="text" value="{{ device.dev_id }}">
-
-        <label>Token</label>
-        <input class="w3-input" type="password" value="{{ device.token }}" id="token-field" disabled>
-        <span toggle="#token-field" class="fa fa-fw fa-eye field-icon toggle-vis"></span>
-
-        <label>Last Seen</label>
-        <input class="w3-input" type="text" value="{{ device.lastseen }}" disabled>
-
-      </div>
-    </form>
-
-    <div class="flex-group-y" id="dev-right">
-      <div class="w3-card w3-white" id="msgs-card">
-        <header class="tableheader">
-          <h4>Received Messages</h4>
-        </header>
-        <table class="w3-table w3-bordered" id="messagestable">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Raw Data</th>
-            </tr>
-          </thead>
-          {% if messages|length %}
-          {% for message in messages %}
-          <tr>
-            <td>{{ message.time }}</td>
-            <td>{{ message.data }}</td>
-          </tr>
-          {% endfor %}
-          {% else %}
-          <tr>
-            <td colspan="2">No Messages to display</td>
-          </tr>
-          {% endif%}
-        </table>
-        <footer>
-
-        </footer>
-      </div>
-
-      <div class="vars-card">
-        <header class="tableheader">
-          <h4>Variables</h4>
-        </header>
-        <div class="flex-container" id="vars-displaybox">
-          {% for variable in variables %}
-          <div class="var-card w3-card">
-            <header class="w3-display-container bg-secondary-grad">
-              <div class="text-light displaybox-lg w3-display-bottomleft">
-                <h4>{{ variable.var_name }} [{{ variable.unit }}]</h4>
-              </div>
-            </header>
+    <div class="flex-group-x" id="dev-displaybox">
+      <form class="w3-white w3-card" id="dev-form">
+        <header class="w3-display-container bg-primary-grad" id="dev-name">
+          <div class="text-light displaybox-lg w3-display-bottomleft">
+            <h4>{{ device.dev_name }}</h4>
           </div>
-          {% endfor %}
-
-          <div class="var-card w3-display-container" id="var-new"
-            onclick="document.getElementById('modal-newvar').style.display='block'">
-            <div class="w3-display-middle">
-              <div class="w3-center">
-                <a href="#" class="centered round-button" id="varnew-icon">
-                  <i class="fa fa-plus"></i>
-                </a>
-                <h6>Add Variable</h6>
+        </header>
+        <div class="w3-container">
+          <label>Sigfox ID</label>
+          <input class="w3-input" type="text" value="{{ device.sigfox_id }}">
+  
+          <label>Last Seen</label>
+          <input class="w3-input" type="text" value="{{ device.lastseen }}" disabled>
+  
+        </div>
+      </form>
+  
+      <div class="flex-group-y" id="dev-right">
+        <div class="w3-card w3-white" id="msgs-card">
+          <header class="tableheader">
+            <h4>Received Messages</h4>
+          </header>
+          <table class="w3-table w3-bordered" id="messagestable">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Raw Data</th>
+              </tr>
+            </thead>
+            {% if messages|length %}
+            {% for message in messages %}
+            <tr>
+              <td>{{ message.time }}</td>
+              <td>{{ message.data }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+              <td colspan="2">No Messages to display</td>
+            </tr>
+            {% endif%}
+          </table>
+          <footer>
+  
+          </footer>
+        </div>
+  
+        <div class="vars-card">
+          <header class="tableheader">
+            <h4>Variables</h4>
+          </header>
+          <div class="flex-container" id="vars-displaybox">
+            {% for variable in variables %}
+            <div class="var-card w3-card">
+            <a href="{{ url_for('main.variable', _id=variable._id) }}">
+              <header class="w3-display-container bg-secondary-grad">
+                <div class="text-light displaybox-lg w3-display-bottomleft">
+                  <h4>{{ variable.var_name }} [{{ variable.unit }}]</h4>
+                </div>
+              </header>
+            </a>
+            </div>
+            {% endfor %}
+  
+            <div class="var-card w3-display-container" id="var-new"
+              onclick="document.getElementById('modal-newvar').style.display='block'">
+              <div class="w3-display-middle">
+                <div class="w3-center">
+                  <a href="{{ url_for('main.add_variable', dev_id=device._id) }}" class="centered round-button" id="varnew-icon">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                  <h6>Add Variable</h6>
+                </div>
               </div>
             </div>
+  
           </div>
-
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- New Variable Modal -->
-<div class="w3-modal" id="modal-newvar">
-  <form class="w3-modal-content w3-card-4 w3-animate-opacity" id="modal-form">
-    <header class="modal-header w3-display-container bg-secondary-grad text-light">
-      <button type="reset" onclick="document.getElementById('modal-newvar').style.display='none'"
-        class="close-button w3-button w3-padding w3-display-topright" >&times;</button>
-      <div class="w3-display-middle">
-        <div class="w3-center">
-          <h4>{{ device.dev_name }}</h4>
-          <h3><input class="w3-input text-light" type="text" placeholder="New Variable" id="var-name"></h3><span class="fa fa-fw fa-pencil field-icon"></span>
-        </div>
-      </div>
-    </header>
-    <div class="w3-container">
-      <div class="w3-container" >
-
-        <label>Data source</label>
-        <select class="w3-select" name="option">
-          <option value="" disabled selected>Choose a field</option>
-          {% for field in fields %}
-          <option value="{{field}}">{{field}}</option>
-          {% endfor %}
-        </select>
-
-        <label>Type</label>
-        <select class="w3-select" name="option">
-          <option value="None" selected>None</option>
-          <option value="Average">Average</option>
-          <option value="Minimum">Minimum</option>
-          <option value="Maximum">Maximum</option>
-          <option value="Sum">Sum</option>
-          <option value="Count">Count</option>
-        </select>
-
-        <label>Unit</label>
-        <input class="w3-input" type="text" placeholder="Add unit" value="">
-
-      </div>
-    </div>
-    <footer class="w3-container w3-border-top w3-padding w3-center">
-      <button onclick="document.getElementById('modal-newvar').style.display='none'" 
-      class="w3-button w3-light-grey" type="reset" name="cancel">Cancel</button>
-      <button class="w3-button w3-light-grey" type="submit" name="add variable">Create variable</button>
-    </footer>
-  </form>
-</div>
-
 {% endblock %}

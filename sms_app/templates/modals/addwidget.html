@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<div class="w3-container">
+    <h1>Add New Widget to {{ dashboard }}</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{{ url_for('main.add_widget2') }}">
+                <img src="{{ url_for('static', filename='img/widgets.png') }}" class="clickable" style="height: 400px;">
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
