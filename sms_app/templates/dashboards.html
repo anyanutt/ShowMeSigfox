@@ -28,7 +28,7 @@
     {% endfor %}
 
     <div class="widget-card w3-card">
-        <h6>Bar Chart</h6>
+        <h6>Phase 1 Power</h6>
         <canvas id="myChart" width="450px" height="200px"></canvas>
         <script>
             var values = {{values | safe}};
@@ -63,7 +63,44 @@
             });
         </script>
     </div>
-
+<!--
+    <div class="widget-card w3-card">
+        <h6>Phase 3 Power</h6>
+        <canvas id="myChart" width="450px" height="200px"></canvas>
+        <script>
+            var values = {{values2 | safe}};
+            var dates = {{dates | safe}};
+    
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Phase 1 power [kWh]',
+                        data: values,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+    </div>
+-->
 
 </div>
 {% endblock %}

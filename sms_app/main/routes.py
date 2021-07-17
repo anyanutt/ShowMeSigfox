@@ -120,20 +120,24 @@ def dashboards():
     device = Device.get_by_id('60d06784d52faa9b9ff9962d')
     messages = sortTimeDec(Message.get_list_by_id(device['sigfox_id']))
     values = []
+    values2 = []
     dates = []
     count = 0
     for i in messages:
         data = i['data'][0:7]
+        data2 = i['data'][16:23]
         values.append(int('0x' + data, 0) / 1000000)
+        values2.append(int('0x' + data2, 0) / 1000000)
         dates.append(i['time'])
         count = count + 1
         if count > 10:
             break
 
     values.reverse()
+    values2.reverse()
     dates.reverse()
 
-    return render_template('dashboards.html', title='Dashboard', widgets="", values=values, dates=dates)
+    return render_template('dashboards.html', title='Dashboard', widgets="", values=values, values2=values2, dates=dates)
 
 @bp.route('/dashboards/new', methods=['GET', 'POST'])
 @login_required
